@@ -3,14 +3,14 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
-    private PlayerInput.Player_OnfootActions onFoot;
+    public PlayerInput.OnFootActions onFoot;
     private PlayerMotor motor;
     private PlayerLook look;
     void Awake()
     {
         playerInput = new PlayerInput();
-        onFoot = playerInput.Player_Onfoot;
-        motor = GetComponent <PlayerMotor> ();
+        onFoot = playerInput.onFoot;
+        motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
         onFoot.Jump.performed += ctx => motor.Jump();
     }

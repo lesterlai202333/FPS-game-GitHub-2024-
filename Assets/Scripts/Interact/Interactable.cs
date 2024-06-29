@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
+    [SerializeField] private GameObject door;
+    private bool doorOpen;
     public string promptMessage;
     public void BaseInteract()
     {
@@ -9,6 +11,7 @@ public abstract class Interactable : MonoBehaviour
     }
     protected virtual void Interact()
     {
-        //no code, this is a template function to be overidden by subclasses
+        doorOpen = !doorOpen;
+        door.GetComponent<Animator>().SetBool("IsOpen", doorOpen);
     }
 }
