@@ -1,6 +1,8 @@
 using UnityEngine;
 
 
+
+
 public class Playerinteract : MonoBehaviour
 {
     private Camera cam;
@@ -10,6 +12,8 @@ public class Playerinteract : MonoBehaviour
     private InputManager iM;
 
 
+
+
     void Start()
     {
         cam = GetComponent<PlayerLook>().cam;
@@ -17,7 +21,11 @@ public class Playerinteract : MonoBehaviour
         iM = GetComponent<InputManager>();
 
 
+
+
     }
+
+
 
 
     // Update is called once per frame
@@ -39,12 +47,24 @@ public class Playerinteract : MonoBehaviour
                 }
 
 
+
+
             }
         }
 
 
+
+
     }
 }
+
+
+
+
+
+
+
+
 
 
 
