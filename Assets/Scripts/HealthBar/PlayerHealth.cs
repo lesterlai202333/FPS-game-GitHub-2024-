@@ -16,14 +16,20 @@ public class PlayerHealth : MonoBehaviour
     public Image overlay;
     public float duration;
     public float fadeSpeed;
-
-
     private float durationTimer;
+    [Header("Heal Overlay")]
+    public Image overlayH;
+    public float durationH;
+    public float fadeSpeedH;
+    private float durationTimerH;
+
+
 
     void Start()
     {
         health = maxHealth;
         overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
+        overlayH.color = new Color(overlayH.color.r, overlayH.color.g, overlayH.color.b, 0);
 
     }
 
@@ -32,18 +38,8 @@ public class PlayerHealth : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
-        if (overlay.color.a > 0)
-        {
-            if (health < 30)
-                return;
-            durationTimer += Time.deltaTime;
-            if (durationTimer > duration)
-            {
-                float tempAlpha = overlay.color.a;
-                tempAlpha -= Time.deltaTime * fadeSpeed;
-                overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, tempAlpha);
-            }
-        }
+        DamageOverlayCheck();
+        HealthOverlayCheck();
 
     }
     public void UpdateHealthUI()
@@ -83,6 +79,48 @@ public class PlayerHealth : MonoBehaviour
     {
         health += healAmount;
         lerpTimer = 0f;
+        durationTimerH = 0;
+        overlayH.color = new Color(overlayH.color.r, overlayH.color.g, overlayH.color.b, 1);
 
+    }
+
+    public void HealthOverlayCheck()
+    {
+        if (overlayH.color.a > 0) //heal overlay
+        {
+
+            if (health < 80)
+            {
+                durationTimerH += Time.deltaTime;
+                if (durationTimerH > durationH)
+                {
+                    float tempAlphaH = overlayH.color.a;
+                    tempAlphaH -= Time.deltaTime * fadeSpeedH;
+                    overlayH.color = new Color(overlayH.color.r, overlayH.color.g, overlayH.color.b, tempAlphaH);
+                }
+            }
+            else
+            {
+                overlayH.color = new Color(overlayH.color.r, overlayH.color.g, overlayH.color.b, 0);
+                durationTimerH = 0;
+            }
+
+        }
+    }
+
+    public void DamageOverlayCheck()
+    {
+        if (overlay.color.a > 0) //damage overlay
+        {
+            if (health < 30)
+                return;
+            durationTimer += Time.deltaTime;
+            if (durationTimer > duration)
+            {
+                float tempAlpha = overlay.color.a;
+                tempAlpha -= Time.deltaTime * fadeSpeed;
+                overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, tempAlpha);
+            }
+        }
     }
 }

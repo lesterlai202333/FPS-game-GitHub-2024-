@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0fc916918a3235469e5ad69f89753f3, type: 3}
+  m_Name: InputIconsUITKManager
+  m_EditorClassIdentifier: 
+  uitkPanelSettings: {fileID: 11400000, guid: 0b620bee87d4a5a42824e972926060ba, type: 2}
+  uitkTextSettings: {fileID: 11400000, guid: 4f37b6acf417a614497df7d85d0012dd, type: 2}
+  uitkTextStyleSheet: {fileID: 11400000, guid: 72ae56d4cbf927f4f9eb27b4cabc9e0c, type: 2}
+  keyboardTextAsset: {fileID: 11400000, guid: 7dfc7b5a0ec29de4d9f96f1218dedc22, type: 2}
+  nintendoProTextAsset: {fileID: 11400000, guid: 5ab180f0c0a7af84bb83e5ed62e93c79, type: 2}
+  ps3TextAsset: {fileID: 11400000, guid: 89bdf0200784c34448aeff141cac2cef, type: 2}
+  ps4TextAsset: {fileID: 11400000, guid: 68bcfe152d7f9d64a803e68669f19eeb, type: 2}
+  ps5TextAsset: {fileID: 11400000, guid: d0d681f9fa17f80419c2f9fec3a6a6f4, type: 2}
+  xBoxTextAsset: {fileID: 11400000, guid: 706a50ca9e163cf4f870481b9f0632cf, type: 2}
+  uiDocumentUpdateOptions: 0

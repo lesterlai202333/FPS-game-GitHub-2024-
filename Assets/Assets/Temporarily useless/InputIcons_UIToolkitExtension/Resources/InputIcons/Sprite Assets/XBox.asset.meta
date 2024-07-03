@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 706a50ca9e163cf4f870481b9f0632cf
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 255994
+  packageName: Input Icons - UI Toolkit Extension
+  packageVersion: 1.1.01
+  assetPath: Assets/InputIcons_UIToolkitExtension/Resources/InputIcons/Sprite Assets/XBox.asset
+  uploadId: 667848
