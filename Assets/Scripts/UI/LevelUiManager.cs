@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 public class LevelUiManager : MonoBehaviour
 {
@@ -7,36 +8,39 @@ public class LevelUiManager : MonoBehaviour
     void Start()
     {
         pause.SetActive(false);
+        isPaused = false;
     }
 
     // Update is called once per frame
-    void Update()
+    public void OnTogglePause(InputAction.CallbackContext ctxt)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (ctxt.performed)
         {
-            if (isPaused)
+            isPaused = !isPaused;
             {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
+                if (isPaused)
+                {
+                    Pause();
+                }
+                else
+                {
+                    Resume();
+                }
             }
         }
-
     }
-    public void ResumeGame()
+
+    public void Resume()
     {
         pause.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
-    public void PauseGame()
+    public void Pause()
     {
         pause.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
-
     }
     public void ExitLevel()
     {

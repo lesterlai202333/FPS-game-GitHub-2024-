@@ -10,7 +10,7 @@ public class Playerinteract : MonoBehaviour
     [SerializeField] private LayerMask mask;
     private PlayerUI playerUI;
     private InputManager iM;
-
+    private CharacterController controller;
 
 
 
@@ -19,10 +19,7 @@ public class Playerinteract : MonoBehaviour
         cam = GetComponent<PlayerLook>().cam;
         playerUI = GetComponent<PlayerUI>();
         iM = GetComponent<InputManager>();
-
-
-
-
+        controller = GetComponent<CharacterController>();
     }
 
 
@@ -41,6 +38,7 @@ public class Playerinteract : MonoBehaviour
             {
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
                 playerUI.UpdateText(interactable.promptMessage);
+
                 if (iM.onFoot.Interact.triggered)
                 {
                     interactable.BaseInteract();
@@ -56,6 +54,7 @@ public class Playerinteract : MonoBehaviour
 
 
     }
+
 }
 
 
