@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class PlayerMotor : MonoBehaviour
 {
     private CharacterController controller;
@@ -29,15 +29,19 @@ public class PlayerMotor : MonoBehaviour
         if (isGrounded && playerVelocity.y < 0)
             playerVelocity.y = -2f;
         controller.Move(playerVelocity * Time.deltaTime);
-        
+
 
     }
 
-    public void Jump()
+    public void Jump(InputAction.CallbackContext ctxt)
     {
-        if (isGrounded)
+        if (ctxt.performed)
         {
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3f * gravity);
+            if (isGrounded)
+            {
+                playerVelocity.y = Mathf.Sqrt(jumpHeight * -3f * gravity);
+            }
         }
+
     }
 }
