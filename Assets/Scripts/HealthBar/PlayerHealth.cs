@@ -1,10 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
 
-    private float health;
+    public float health;
+    public GameObject character;
+    public float deathTimer = 3f;
+    public bool dead;
+
+    public float deathStartTime;
+    public GameObject deathScreen;
     private float lerpTimer;
     [Header("Health Bar")]
     public float maxHealth = 100f;
@@ -25,23 +31,29 @@ public class PlayerHealth : MonoBehaviour
 
 
 
-    void Start()
+    void Awake()
     {
         health = maxHealth;
+
         overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
         overlayH.color = new Color(overlayH.color.r, overlayH.color.g, overlayH.color.b, 0);
+        deathScreen.SetActive(false);
+        deathTimer = 3f;
+        dead = false;
+        Time.timeScale = 1f;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        health = Mathf.Clamp(health, 0, maxHealth);
+        health = Mathf.Clamp(health, -100, maxHealth);
         UpdateHealthUI();
         DamageOverlayCheck();
         HealthOverlayCheck();
-
+        death();
     }
+
     public void UpdateHealthUI()
     {
 
@@ -74,6 +86,7 @@ public class PlayerHealth : MonoBehaviour
         lerpTimer = 0f;
         durationTimer = 0;
         overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1);
+
     }
     public void RestoreHealth(float healAmount)
     {
@@ -122,5 +135,28 @@ public class PlayerHealth : MonoBehaviour
                 overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, tempAlpha);
             }
         }
+    }
+    public void death()
+    {
+        if (health <= 0 && !dead)
+        {
+            deathScreen.SetActive(true);
+            dead = true;
+            deathStartTime = Time.realtimeSinceStartup; // Store the time when the player dies
+            Time.timeScale = 0; // Pause the game
+        }
+
+        if (dead == true)
+        {
+            float elapsedTime = Time.realtimeSinceStartup - deathStartTime;
+
+            if (elapsedTime >= 3f && Input.anyKeyDown)
+            {
+                Time.timeScale = 1f; // Restore the time scale before reloading
+                SceneManager.LoadScene("Scene 1");
+            }
+
+        }
+
     }
 }

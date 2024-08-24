@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour
     public PlayerInput.OnFootActions onFoot;
     public PlayerMotor motor;
     public PlayerLook look;
+
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -31,8 +32,9 @@ public class InputManager : MonoBehaviour
     {
         onFoot.Enable();
     }
-    private void OnDisable()
+    public void OnDisable()
     {
+
         onFoot.Disable();
     }
 }

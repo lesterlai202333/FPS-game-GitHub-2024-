@@ -5,10 +5,14 @@ public class LevelUiManager : MonoBehaviour
 {
     public GameObject pause;
     public bool isPaused;
+
+
     void Start()
     {
         pause.SetActive(false);
+
         isPaused = false;
+
     }
 
     // Update is called once per frame

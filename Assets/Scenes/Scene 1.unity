@@ -1809,7 +1809,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a248dfe921b74790872ef285d562f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerVelocity: {x: 0, y: 0, z: 0}
   speed: 5
+  isGrounded: 0
   gravity: -9.81
   jumpHeight: 3
 --- !u!114 &263449127
@@ -1824,6 +1826,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1faf1804f82304fc0836cafe1ee66adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  motor: {fileID: 0}
+  look: {fileID: 0}
 --- !u!114 &263449132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1900,11 +1904,35 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 263449124}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 9fc4f8fc-fac8-412e-bbf2-a349e8ebfb01
     m_ActionName: 'onFoot/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 263449126}
+        m_TargetAssemblyTypeName: PlayerMotor, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 0b4b05df-1460-4aff-b243-cfcf6e703ec9
     m_ActionName: 'onFoot/Jump[/Keyboard/space]'
   - m_PersistentCalls:

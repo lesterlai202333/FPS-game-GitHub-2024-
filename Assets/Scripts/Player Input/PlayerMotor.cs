@@ -3,15 +3,19 @@ using UnityEngine.InputSystem;
 public class PlayerMotor : MonoBehaviour
 {
     private CharacterController controller;
-    private Vector3 playerVelocity;
+    public Vector3 playerVelocity;
+
     public float speed = 5f;
-    private bool isGrounded;
+    public bool isGrounded;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
+
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -35,13 +39,14 @@ public class PlayerMotor : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext ctxt)
     {
+
         if (ctxt.performed)
         {
             if (isGrounded)
             {
                 playerVelocity.y = Mathf.Sqrt(jumpHeight * -3f * gravity);
             }
-        }
 
+        }
     }
 }
