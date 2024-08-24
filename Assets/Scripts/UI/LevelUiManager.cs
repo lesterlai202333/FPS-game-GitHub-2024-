@@ -1,17 +1,19 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 public class LevelUiManager : MonoBehaviour
 {
     public GameObject pause;
     public bool isPaused;
 
 
-    void Start()
+    void Awake()
     {
         pause.SetActive(false);
 
         isPaused = false;
+
 
     }
 
@@ -51,5 +53,10 @@ public class LevelUiManager : MonoBehaviour
 
         Time.timeScale = 1f;
         SceneManager.LoadScene("StartPage 1");
+    }
+    public void SetFullscreen(bool _fullscreen)
+    {
+        Screen.fullScreen = _fullscreen;
+
     }
 }
