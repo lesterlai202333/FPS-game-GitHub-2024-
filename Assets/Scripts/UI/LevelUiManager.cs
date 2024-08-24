@@ -56,7 +56,12 @@ public class LevelUiManager : MonoBehaviour
     }
     public void SetFullscreen(bool _fullscreen)
     {
+        bool fullScreen = Screen.fullScreen;
         Screen.fullScreen = _fullscreen;
 
+    }
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene("Scene 1");
     }
 }

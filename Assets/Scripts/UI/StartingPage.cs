@@ -9,6 +9,7 @@ public class StartingPage : MonoBehaviour
     }
     public void SetFullscreen(bool _fullscreen)
     {
+        bool fullScreen = Screen.fullScreen;
         Screen.fullScreen = _fullscreen;
 
     }
