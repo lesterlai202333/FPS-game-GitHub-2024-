@@ -14,6 +14,7 @@ public class Playerinteract : MonoBehaviour
 
 
 
+
     void Start()
     {
         cam = GetComponent<PlayerLook>().cam;
@@ -50,6 +51,8 @@ public class Playerinteract : MonoBehaviour
         }
 
     }
+
+
 
 }
 
