@@ -96,9 +96,14 @@ public class PlayerMotor : MonoBehaviour
 
         if (isGrounded && hasMoved && !isFalling && fallTimer <= 0)  //this is so that the player must be on the ground, moving, hasn't just landed, and a slight delay after landing so that the landing sound effect plays first before walking sound effect
         {
-            WalkingSound.Play(); //playing the walking sound effect
+            WalkingSound.enabled = true; //playing the walking sound effect
 
         }
+        else
+        {
+            WalkingSound.enabled = false;
+        }
+
 
 
     }
