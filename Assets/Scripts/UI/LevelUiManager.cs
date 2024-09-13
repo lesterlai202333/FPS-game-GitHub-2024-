@@ -19,7 +19,21 @@ public class LevelUiManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    void Update()
+    {
+        if (isPaused)
+        {
+
+            //locking the cursor to the middle of the screen and making it invisible
+            Cursor.lockState = CursorLockMode.Confined;
+
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+    }
     public void OnTogglePause(InputAction.CallbackContext ctxt)
     {
         if (ctxt.performed)
