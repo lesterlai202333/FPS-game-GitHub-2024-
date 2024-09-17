@@ -43,6 +43,10 @@ public class WeaponManager : MonoBehaviour
         {
             SwitchActiveSlot(1);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SwitchActiveSlot(2);
+        }
 
 
     }
@@ -79,17 +83,31 @@ public class WeaponManager : MonoBehaviour
 
     public void SwitchActiveSlot(int slotNumber)
     {
-        if (activeWeaponSlots.transform.childCount > 0)
+        // Step 1: Deactivate the current active weapon (if any)
+        if (activeWeaponSlots != null && activeWeaponSlots.transform.childCount > 0)
         {
             Weapon currentWeapon = activeWeaponSlots.transform.GetChild(0).GetComponent<Weapon>();
-            currentWeapon.isActiveWeapon = false;
+            if (currentWeapon != null)
+            {
+                currentWeapon.isActiveWeapon = false; // Deactivate current weapon
+                currentWeapon.gameObject.SetActive(false); // Hide the current weapon
+            }
         }
+
+        // Step 2: Switch to the new weapon slot
         activeWeaponSlots = weaponSlots[slotNumber];
-        if (activeWeaponSlots.transform.childCount > 0)
+
+        // Step 3: Ensure the new weapon (if any) is activated
+        if (activeWeaponSlots != null && activeWeaponSlots.transform.childCount > 0)
         {
-            Weapon newWeapon = activeWeaponSlots.transform.GetChild(0).GetComponentInParent<Weapon>();
-            newWeapon.isActiveWeapon = true;
+            Weapon newWeapon = activeWeaponSlots.transform.GetChild(0).GetComponent<Weapon>();
+            if (newWeapon != null)
+            {
+                newWeapon.isActiveWeapon = true; // Activate new weapon
+                newWeapon.gameObject.SetActive(true); // Show the new weapon
+            }
+
         }
+
     }
 }
-
