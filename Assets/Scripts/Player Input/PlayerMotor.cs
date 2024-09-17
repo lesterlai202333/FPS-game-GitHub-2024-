@@ -16,6 +16,7 @@ public class PlayerMotor : MonoBehaviour
     public AudioSource WalkingSound;
     public AudioSource LandingSound;
     private Vector3 previousPosition;
+    public float landingSoundTimer = 1f;
     private float fallTimer; //declaring variables. public variables can be accessed in other scripts, private variables cannont.
     void Start()
     {
@@ -23,10 +24,25 @@ public class PlayerMotor : MonoBehaviour
         previousPosition = transform.position; //sets the previousPosition variable to the current position of the player
     }
 
+    private void Awake()
+    {
+        if (landingSoundTimer > 0)
+        {
+            LandingSound.enabled = false;
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (landingSoundTimer > 0)
+        {
+            landingSoundTimer -= Time.deltaTime;
+        }
+        else
+        {
+            LandingSound.enabled = true;
+        }
         isGrounded = controller.isGrounded; //checks if the character or object controlled by the controller is currently touching the ground. It then stores this boolean value (true or false) in the isGrounded variable.
         Falling(); //calls the falling function constantly
         HandleWalkingSound();//calls the handlewalkingsound function constantly

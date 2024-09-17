@@ -1,20 +1,40 @@
 using System;
 using System.Collections;
 using System.Numerics;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject bulletPrefab;
 
+    public bool isActiveWeapon;
     public bool isShooting, readyToShoot;
     bool allowReset = true;
     public float shootingDelay = 2f;
     public int bulletsPerBurst = 3;
     public int burstBulletsLeft;
     public float spreadIntensity;
+    public GameObject muzzleEffect;
+    internal Animator animator;
+    public float reloadTime;
+    public int magazineSize, bulletsLeft;
+    public bool isReloading;
+    public UnityEngine.Vector3 spawnPosition;
+    public UnityEngine.Vector3 spawnRotation;
+    public enum WeaponModel
+    {
+        pistols,
+        RifleAK47,
+        Snipers,
+
+        Crackshots,
+    }
+
+
     public enum ShootingMode
     {
         Single,
@@ -26,30 +46,63 @@ public class Weapon : MonoBehaviour
     public float bulletPrefabLifeTime = 3f;
 
     public ShootingMode currentShootingMode;
+    public WeaponModel thisWeaponModel;
+
     private void Awake()
     {
         readyToShoot = true;
         burstBulletsLeft = bulletsPerBurst;
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
-        if (currentShootingMode == ShootingMode.Auto)
-        {
-            isShooting = Input.GetKey(KeyCode.Mouse0);
-        }
-        else if (currentShootingMode == ShootingMode.Single || currentShootingMode == ShootingMode.Burst)
-        {
-            isShooting = Input.GetKeyDown(KeyCode.Mouse0);
-        }
-        if (readyToShoot && isShooting)
-        {
-            burstBulletsLeft = bulletsPerBurst;
-            FireWeapon();
-        }
 
+
+        if (isActiveWeapon)
+        {
+            GetComponent<Outline>().enabled = false;
+
+            if (bulletsLeft == 0 && isShooting)
+            {
+                //ShootingSoundManager.Instance.PistolemptySoundEffect.Play();
+                ShootingSoundManager.Instance.emptySoundEffect.Play();
+            }
+            if (currentShootingMode == ShootingMode.Auto)
+            {
+                isShooting = Input.GetKey(KeyCode.Mouse0);
+            }
+            else if (currentShootingMode == ShootingMode.Single || currentShootingMode == ShootingMode.Burst)
+            {
+                isShooting = Input.GetKeyDown(KeyCode.Mouse0);
+            }
+            if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && isReloading == false)
+            {
+                Reload();
+            }
+            //automatic reload when magazine empty
+            if (readyToShoot && !isShooting && isReloading == false && bulletsLeft <= 0)
+            {
+                Reload();
+            }
+            if (readyToShoot && isShooting && bulletsLeft > 0)
+            {
+                burstBulletsLeft = bulletsPerBurst;
+                FireWeapon();
+            }
+            if (AmmoManager.Instance.ammoDisplay != null)
+            {
+                AmmoManager.Instance.ammoDisplay.text = $"{bulletsLeft / bulletsPerBurst}/{magazineSize / bulletsPerBurst}";
+            }
+        }
     }
     private void FireWeapon()
     {
+        bulletsLeft--;
+        muzzleEffect.GetComponent<ParticleSystem>().Play();
+        animator.SetTrigger("Recoil");
+        //ShootingSoundManager.Instance.pistolshootingSound.Play();
+        ShootingSoundManager.Instance.PlayShootingSound(thisWeaponModel);
+
         readyToShoot = false;
         UnityEngine.Vector3 shootingDirection = CalculateDirectionAndSpread().normalized;
         //creates the bullet(instantiate)
@@ -76,6 +129,21 @@ public class Weapon : MonoBehaviour
             Invoke("FireWeapon", shootingDelay);
         }
 
+
+    }
+
+    private void Reload()
+    {
+        //ShootingSoundManager.Instance.PistolreloadingSoundEffect.Play();
+        ShootingSoundManager.Instance.PlayReloadSound(thisWeaponModel);
+        animator.SetTrigger("Reload");
+        isReloading = true;
+        Invoke("reloadCompleted", reloadTime);
+    }
+    private void reloadCompleted()
+    {
+        bulletsLeft = magazineSize;
+        isReloading = false;
     }
     private IEnumerator DestroyBulletAfterTime(GameObject bullet, float delay)
     {

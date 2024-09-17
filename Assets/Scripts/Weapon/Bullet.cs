@@ -22,8 +22,8 @@ public class Bullet : MonoBehaviour
         {
             print("hit a beer bottle");
             objectWeHit.gameObject.GetComponent<BeerBottle>().Shatter();
-
         }
+
     }
 
     void BulletImpactEffect(Collision objectWeHit)
@@ -31,6 +31,8 @@ public class Bullet : MonoBehaviour
         ContactPoint contact = objectWeHit.contacts[0];
 
         GameObject hole = Instantiate(GlobalReference.Instance.bulletImpactEffectPrefab, contact.point, Quaternion.LookRotation(contact.normal));
-        hole.transform.SetParent(objectWeHit.gameObject.transform);
+        hole.transform.SetParent(objectWeHit.transform);
     }
+
+
 }
