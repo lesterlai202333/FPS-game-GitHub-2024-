@@ -3,20 +3,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMotor : MonoBehaviour
 {
-    [SerializeField] private AudioSource JumpSound;
+    [SerializeField] private AudioSource JumpSound; //private means cannot be accessed out of script howveer due to the serialized field it can be accessed in the unity inspector. The type of variable is an audiosource
     private CharacterController controller; //declaring an audiosource and a charactercontroller that I can assign in the unity editor.
-    public Vector3 playerVelocity;
+    public Vector3 playerVelocity;//public --> can be accessed from outside of this script
 
-    public float speed = 5f;
-    public bool isGrounded;
-    public float gravity = -9.81f;
-    public float jumpHeight = 3f;
+    public float speed = 5f; //public --> can be accessed from outside of this script
+    public bool isGrounded;//public --> can be accessed from outside of this script
+    public float gravity = -9.81f;//public --> can be accessed from outside of this script
+    public float jumpHeight = 3f;//public --> can be accessed from outside of this script
     private bool isFalling = false;
 
-    public AudioSource WalkingSound;
-    public AudioSource LandingSound;
+    public AudioSource WalkingSound;//public --> can be accessed from outside of this script
+    public AudioSource LandingSound;//public --> can be accessed from outside of this script
     private Vector3 previousPosition;
-    public float landingSoundTimer = 1f;
+    public float landingSoundTimer = 1f;//public --> can be accessed from outside of this script
     private float fallTimer; //declaring variables. public variables can be accessed in other scripts, private variables cannont.
     void Start()
     {
@@ -49,7 +49,7 @@ public class PlayerMotor : MonoBehaviour
         previousPosition = transform.position; //constantly sets the previousPosition variable to the current position of the player
     }
 
-    public void ProcessMove(Vector2 input)
+    public void ProcessMove(Vector2 input) //public --> can be accessed from outside of this script, void means no value return, the function processes move and only accepts parameters of Vector 2 from player's input
     {
         Vector3 moveDirection = Vector3.zero; //A Vector3 named moveDirection is initialized to Vector3.zero, meaning it starts with (0, 0, 0).
         moveDirection.x = input.x; //The x component of moveDirection is set to the x value from input(keyboard input for horizontal and vertical movement).
@@ -63,7 +63,7 @@ public class PlayerMotor : MonoBehaviour
 
     }
 
-    public void Jump(InputAction.CallbackContext ctxt) //InputAction.CallbackContext ctxt provides context and details about the input action.
+    public void Jump(InputAction.CallbackContext ctxt) //InputAction.CallbackContext ctxt provides context and details about the input action. This has got to do with the keybind, so if the key corresponding to jump is pressed then the stuff inside this function would be played. public --> can be accessed from outside of this script, void means no value returned
     {
 
         if (ctxt.performed) // Checks if the input action has been successfully performed, ensuring that the associated code only runs in response to the actual input event.
@@ -81,7 +81,7 @@ public class PlayerMotor : MonoBehaviour
             //so for example the player only jumps when the player presses space., as it's provided as part of the context here: (InputAction.CallbackContext ctxt)
         }
     }
-    public void Falling()
+    public void Falling()//public --> can be accessed from outside of this script, void means no value returned.
     {
         if (!isGrounded && playerVelocity.y < 0) //condition of when the y velocity is below 0 the player is accelerating down and the player isn't grounded so not on a slope, the is falling variable is now true             
         {

@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 public class StartingPage : MonoBehaviour
 {
-    public GameObject settingsPage;
-    public AudioSource ButtonSoundEffect;
+    public GameObject settingsPage;//public --> can be accessed from outside of this script, gameobject is the type of variable, last word is the name of the variable
+    public AudioSource ButtonSoundEffect;//public --> can be accessed from outside of this script, type of variable is an audiosource and the last word is its name given by me.
     public AudioSource PlayGameEffect; //declaring audiosources and Gameobjects to be assigned in the unity editor    
     void Start()
     {
