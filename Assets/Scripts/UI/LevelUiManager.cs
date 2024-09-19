@@ -8,7 +8,8 @@ public class LevelUiManager : MonoBehaviour
     public bool isPaused;//public --> can be accessed from outside of this script, variable type is a boolean（true or false, last word is the name of the variable.
     public AudioSource SoundEffect;//public --> can be accessed from outside of this script, variable type is an audiosource, last word is name of the variable declared in the script.
     public AudioSource PlayGameEffect;//public --> can be accessed from outside of this script, variable type is an audiosource, last word is name of the variable declared in the script.
-
+    public GameObject pauseContent;
+    public GameObject settingsPage;
 
     void Awake()
     {
@@ -27,11 +28,14 @@ public class LevelUiManager : MonoBehaviour
             //locking the cursor to the middle of the screen and making it invisible
             Cursor.lockState = CursorLockMode.Confined;
 
+
         }
         else
         {
             Cursor.lockState = CursorLockMode.Locked;
+
         }
+
 
     }
     public void OnTogglePause(InputAction.CallbackContext ctxt)//public --> can be accessed from outside of this script
@@ -43,12 +47,15 @@ public class LevelUiManager : MonoBehaviour
             {
                 if (isPaused)
                 {
+                    Cursor.lockState = CursorLockMode.Confined;
                     Pause(); //if the game is paused, the pause menu is activated, time is frozen.....everything in the pause（） function
 
                 }
                 else
                 {
+                    Cursor.lockState = CursorLockMode.Locked;
                     Resume(); //resumes the game
+
                 }
             }
         }
@@ -57,13 +64,19 @@ public class LevelUiManager : MonoBehaviour
     public void Resume()//public --> can be accessed from outside of this script
     {
         pause.SetActive(false);
+        pauseContent.SetActive(false);
+        settingsPage.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
         SoundEffect.Play(); //pause menu UI deactivated so disappears from screen, time set back to normal, the game isn't paused, and a sound effect is played
+
+
+
     }
     public void Pause()//public --> can be accessed from outside of this script
     {
         pause.SetActive(true); //pause menu set active, time frozen, the game is paused
+        pauseContent.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -83,6 +96,10 @@ public class LevelUiManager : MonoBehaviour
     public void RestartLevel()//public --> can be accessed from outside of this script
     {
         SceneManager.LoadScene("Scene 1"); //reloads this scene
+    }
+    public void RestartLachlan()//public --> can be accessed from outside of this script
+    {
+        SceneManager.LoadScene("Lachlan Scene"); //reloads this scene
     }
 
     public void TabAndButtonSoundEffect()//public --> can be accessed from outside of this script

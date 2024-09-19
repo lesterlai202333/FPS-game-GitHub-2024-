@@ -6,7 +6,10 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("Scene 1"); //transtions to the Scene 1 when this function is called
     }
-
+    public void Lachlan()//public --> can be accessed from outside of this script, void means no value returned
+    {
+        SceneManager.LoadScene("Lachlan Scene"); //transtions to the Scene 1 when this function is called
+    }
 
     public void QuitGame()//public --> can be accessed from outside of this script, void means non value returned
     {

@@ -18,10 +18,14 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 previousPosition;
     public float landingSoundTimer = 1f;//public --> can be accessed from outside of this script
     private float fallTimer; //declaring variables. public variables can be accessed in other scripts, private variables cannont.
+
     void Start()
     {
         controller = GetComponent<CharacterController>(); //accessing information of the character controlelr when the scene is started
         previousPosition = transform.position; //sets the previousPosition variable to the current position of the player
+
+
+
     }
 
     private void Awake()
@@ -35,6 +39,8 @@ public class PlayerMotor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         if (landingSoundTimer > 0)
         {
             landingSoundTimer -= Time.deltaTime;

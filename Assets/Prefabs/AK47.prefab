@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 804551071468755766}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: bulletSpawn (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 3900791879575769045}
   - component: {fileID: 8608521858323970969}
   - component: {fileID: 810355197137087063}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MuzzleFlashEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4829,7 +4829,7 @@ GameObject:
   - component: {fileID: 3741026756604012841}
   - component: {fileID: 8702649549117748444}
   - component: {fileID: 7390172206897595374}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4915,7 +4915,7 @@ GameObject:
   - component: {fileID: 3063109517318261925}
   - component: {fileID: 3445953092989534332}
   - component: {fileID: 2033868139904683466}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5005,7 +5005,9 @@ GameObject:
   - component: {fileID: 8299603741408011921}
   - component: {fileID: 4917083778839392461}
   - component: {fileID: 4637574813629019506}
-  m_Layer: 0
+  - component: {fileID: 1444460268443439369}
+  - component: {fileID: -3443737579049516088}
+  m_Layer: 6
   m_Name: AK47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5111,6 +5113,7 @@ MonoBehaviour:
   isReloading: 0
   spawnPosition: {x: 2.458043, y: 0.972656, z: -4.538564}
   spawnRotation: {x: 0, y: 180, z: 0}
+  li: {fileID: 0}
   bulletSpawn: {fileID: 804551071468755766}
   bulletVelocity: 30
   bulletPrefabLifeTime: 3
@@ -5177,6 +5180,35 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.033782385, y: 0.2489922, z: 0.7707256}
   m_Center: {x: -0.0017576702, y: -0.07732436, z: -0.062597096}
+--- !u!114 &1444460268443439369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3425867216177322379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f55695f5e8f94b39b23fae8ae1bba9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useEvents: 1
+  promptMessage: press E to switch/pick up
+--- !u!114 &-3443737579049516088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3425867216177322379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ed47f008dbb4cd6bb20f1c1f395b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteract:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7870948134954591823
 GameObject:
   m_ObjectHideFlags: 0
@@ -5188,7 +5220,7 @@ GameObject:
   - component: {fileID: 8232198612245303135}
   - component: {fileID: 2817725791383013279}
   - component: {fileID: 2505910892121901341}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class InteractionManager : MonoBehaviour
 {
+
     public static InteractionManager Instance { get; set; }// by making it static it basically clamps the instance variable declared to this one script only. And in this singleton pattern unity makes sure only one InteractionManager script exists. 'get' allows you to retrieve or access the value of the property. 'set' allows you to assign or modify the value of the property.
     public Weapon hoveredWeapon = null;//public --> can be accessed from outside of this script, the type of variable is the weapon script, this variable holds a reference to a Weapon object, which is currently being hovered over, it's initiallized to null so no weapon is being hovered over at the start.
     private void Awake() //private means cannot be accessed elsewhere, Awake is a Unity method that is called when the script instance is being loaded, before the Start method and before the scene is fully initialized.
@@ -19,31 +20,60 @@ public class InteractionManager : MonoBehaviour
     //this is a singleton system, it's here to make sure that there's only one object in game that has this script, otherwise it can cause a lot of chaos and become mixed up with other things. 
     //So as the script awakes, it asks: are there any other gameobjects with this script? if yes, then that game object gets destroyed, if no, this would become the only gameobject with this script.
     private void Update()
-    {// Create a ray from the center of the screen (viewport point (0.5, 0.5)) in the direction the camera is facing
+    {
+        // Create a ray from the center of the screen (viewport point (0.5, 0.5)) in the direction the camera is facing
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit; //stores the information in the 'hit' variable
-        if (Physics.Raycast(ray, out hit)) //are there any object in the way? If yes, then proceed
+        RaycastHit hit; // Variable to store information about what the raycast hits
+
+        // Cast a ray with a maximum distance of 1.5 units
+        if (Physics.Raycast(ray, out hit, 1.5f))
         {
-            GameObject objecthitByRaycast = hit.transform.gameObject; // Gets the GameObject that was hit by the raycast
-            if (objecthitByRaycast.GetComponent<Weapon>() && objecthitByRaycast.GetComponent<Weapon>().isActiveWeapon == false) //// Check if the hit object has a Weapon component and if that weapon is inactive
-            {//// Store the weapon that is currently being hovered over
-                hoveredWeapon = objecthitByRaycast.gameObject.GetComponent<Weapon>();
-                hoveredWeapon.GetComponent<Outline>().enabled = true; //enables the outline component of the weapon that's being hovered over
+            // Get the GameObject that was hit by the raycast
+            GameObject objecthitByRaycast = hit.transform.gameObject;
 
-
-
-                if (Input.GetKeyDown(KeyCode.F)) //if the F key is pressed, then it calls the pickupweapon function from the WeaponManager script to pick up the object hit by raycast
+            // Check if the hit object has a Weapon component and if that weapon is inactive
+            if (objecthitByRaycast.GetComponent<Weapon>() && !objecthitByRaycast.GetComponent<Weapon>().isActiveWeapon)
+            {
+                // Check if the currently hovered weapon is not the same as the newly hit weapon
+                if (hoveredWeapon != objecthitByRaycast.GetComponent<Weapon>())
                 {
-                    WeaponManager.Instance.PickupWeapon(objecthitByRaycast.gameObject);
+                    // If there was a previously hovered weapon, disable its outline effect
+                    if (hoveredWeapon != null)
+                    {
+                        hoveredWeapon.GetComponent<Outline>().enabled = false;
+                    }
+
+                    // Update the hovered weapon to the newly hit weapon
+                    hoveredWeapon = objecthitByRaycast.GetComponent<Weapon>();
+                    hoveredWeapon.GetComponent<Outline>().enabled = true; // Enable the outline effect for the new hovered weapon
+                }
+
+                // Check if the E key is pressed to pick up the weapon
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    WeaponManager.Instance.PickupWeapon(objecthitByRaycast.gameObject); // Call the pickup function from WeaponManager
                 }
             }
             else
             {
-                if (hoveredWeapon) //// If there was a previously hovered weapon, disable its outline effect
+                // If the hit object is not a weapon or is an active weapon
+                if (hoveredWeapon != null)
                 {
-                    hoveredWeapon.GetComponent<Outline>().enabled = false; //if it's
+                    hoveredWeapon.GetComponent<Outline>().enabled = false; // Disable the outline effect of the previously hovered weapon
+                    hoveredWeapon = null; // Clear the reference to the previously hovered weapon
                 }
             }
         }
+        else
+        {
+            // If no object was hit by the raycast
+            if (hoveredWeapon != null)
+            {
+                hoveredWeapon.GetComponent<Outline>().enabled = false; // Disable the outline effect of the previously hovered weapon
+                hoveredWeapon = null; // Clear the reference to the previously hovered weapon
+            }
+        }
     }
+
+
 }

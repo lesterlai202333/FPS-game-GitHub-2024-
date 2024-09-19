@@ -34,7 +34,7 @@ public class Weapon : MonoBehaviour
         Crackshots,
     }
 
-
+    public LevelUiManager li; //declaring a public variable in the inspector
     public enum ShootingMode//public --> can be accessed from outside of this script, this is basically a list of data of the type shootingmode
     {
         Single,
@@ -53,12 +53,13 @@ public class Weapon : MonoBehaviour
         readyToShoot = true; // the gun is ready to shoot by default
         burstBulletsLeft = bulletsPerBurst;  //sets the burstBulletsLeft to be its default size(bulletsPerburst)
         animator = GetComponent<Animator>(); //gets the information from the animator component
+
     }
     void Update()
     {
 
 
-        if (isActiveWeapon) //if the weapon is active
+        if (isActiveWeapon && !li.isPaused) //if the weapon is active and the game isn't paused, this accesses the Variable isPaused in the level ui manager
         {
             GetComponent<Outline>().enabled = false; //// Hides the outline if the weapon is active
 

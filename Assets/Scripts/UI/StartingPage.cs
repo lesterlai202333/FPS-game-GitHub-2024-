@@ -9,6 +9,7 @@ public class StartingPage : MonoBehaviour
     {
         settingsPage.SetActive(false); //the settings page is set inactive when the scene starts
     }
+
     public void SetFullscreen(bool _fullscreen)//The SetFullscreen function toggles the fullscreen mode of the application based on the value of the _fullscreen parameter. If _fullscreen is true, it switches to fullscreen mode; if false, it switches to windowed mode.
     {
         bool fullScreen = Screen.fullScreen; //This line retrieves the current fullscreen state of the application (i.e., whether the game is currently in fullscreen mode) and stores it in a local variable called fullScreen.
